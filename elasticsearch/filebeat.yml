@@ -1,0 +1,17 @@
+
+#filebeat.config.modules:
+#  path: /etc/filebeat/modules.d/*.yml
+#filebeat.modules:
+#- module: apache2
+filebeat.prospectors:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/*.log
+    - /var/log/httpd/*_log
+  reload.enabled: true
+  reload.period: 10s
+output.elasticsearch:
+  hosts: ["localhost:9200"]
+setup.kibana:
+  host: "kibana:5601"
